@@ -1,10 +1,15 @@
+import "server-only";
+
+import { UsersRepository } from "@/server/repositories";
 import { Context } from "hono";
 
-export const deleteUserHandler = (c: Context) => {
+export const deleteUser = async (c: Context) => {
   const { id } = c.req.param();
-  if (id === "123") {
-    return c.json({ code: 400, message: "ユーザーが存在しません。" }, 400);
+  const isUserExists = await UsersRepository.exists(Number(id));
+  if (!isUserExists) {
+    return new Response(null, { status: 404 });
   }
-  // ここにユーザー削除処理
+  await UsersRepository.delete(Number(id));
+
   return new Response(null, { status: 204 });
 };

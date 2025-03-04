@@ -13,7 +13,7 @@ datasource db {
 model Hoby {
   id    Int     @id @default(autoincrement())
   name  String
-  user  User?   @relation(fields: [userId], references: [id])
+  user  User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  Int
 }
 

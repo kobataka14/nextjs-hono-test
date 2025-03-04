@@ -1,18 +1,13 @@
-import {
-  UserCreateRequestType,
-  UserResponseType,
-} from "@/server/schemas/users";
+import "server-only";
+
+import { UsersRepository } from "@/server/repositories";
+import { UserCreateRequestType } from "@/server/schemas/users";
 import { Context } from "hono";
 
 // ユーザー作成処理
-export const createUserHandler = async (c: Context) => {
+export const createUser = async (c: Context) => {
   const body: UserCreateRequestType = await c.req.json();
-  const response: UserResponseType = {
-    id: 100,
-    email: "dummy@example.com",
-    name: body.name,
-    age: body.age,
-    hobbies: body.hobbies ?? [],
-  };
+  const response = await UsersRepository.create(body);
+
   return c.json(response, 201);
 };

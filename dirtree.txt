@@ -13,13 +13,20 @@
 │   ├── server
 │   │   ├── handlers
 │   │   │   └── users
+│   │   │       ├── index.ts
 │   │   │       ├── create.ts
 │   │   │       ├── delete.ts
-│   │   │       ├── read.ts
+│   │   │       ├── getUser.ts
+│   │   │       ├── getUsers.ts
 │   │   │       └── update.ts
+│   │   ├── lib
+│   │   │   └── db.ts
 │   │   ├── middlewares
 │   │   │   ├── errorHandler.ts
 │   │   │   └── validationError.ts
+│   │   ├── repositories
+│   │   │   ├── index.ts
+│   │   │   └── users.ts
 │   │   ├── responses
 │   │   │   └── errors.ts
 │   │   ├── routes
@@ -39,8 +46,10 @@
 /prisma/schema.prisma	Prisma のスキーマ定義ファイル（データベースモデルを記述）
 /src/app/api/[[...route]]/	Next.js の API ルートハンドラー（Hono のエントリーポイント）
 /src/server/middlewares/	共通のミドルウェア管理（例: errorHandler.ts でエラーハンドリング）
+/src/server/repositories/	データベースアクセスに使用
+/src/server/lib/	ライブラリやユーティリティ等（db,auth...）
 /src/server/routes/	API ルート定義（users.ts など、各エンドポイントのエントリーポイント）
 /src/server/handlers/	ビジネスロジックを担当（CRUDごとに分割し、個別の処理を実装）
 /src/server/responses/	API の共通レスポンス型定義（例: errors.ts でエラーレスポンスを統一）
 /src/schemas/	Zod スキーマを管理（users.ts でユーザーの入力バリデーション、errors.ts でエラースキーマ）
-/src/types/api.d.ts	openapi-typescript によって生成される API 型定義（フロントエンドで利用）
+/src/types/api.d.ts	openapi-typescript APIの型定義（フロントエンドで使用。openapi-typescriptで生成）

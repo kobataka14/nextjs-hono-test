@@ -7,16 +7,21 @@ import {
   UserUpdateSchema,
   UserListParamsSchema,
 } from "../schemas/users";
-import { createUserHandler } from "../handlers/users/create";
-import { getUserByIdHandler, getUsersHandler } from "../handlers/users/read";
-import { updateUserHandler } from "../handlers/users/update";
-import { deleteUserHandler } from "../handlers/users/delete";
+import {
+  createUser,
+  getUser,
+  getUsers,
+  updateUser,
+  deleteUser,
+} from "@/server/handlers/users";
 import { error400, error404, error422, error500 } from "../responses/errors";
 import { defaultValidationHook } from "../middlewares/validationError";
+import { handleError } from "../middlewares/errorHandler";
 
 const users = new OpenAPIHono({
   defaultHook: defaultValidationHook, // handling validation errors
 });
+users.onError(handleError);
 
 /**ルートの定義 */
 
@@ -47,7 +52,7 @@ users.openapi(
       ...error500,
     },
   }),
-  createUserHandler,
+  createUser,
 );
 
 // ユーザー取得
@@ -72,7 +77,7 @@ users.openapi(
       ...error500,
     },
   }),
-  getUserByIdHandler,
+  getUser,
 );
 
 // ユーザー取得
@@ -96,7 +101,7 @@ users.openapi(
       ...error500,
     },
   }),
-  getUsersHandler,
+  getUsers,
 );
 
 // ユーザー更新
@@ -128,7 +133,7 @@ users.openapi(
       ...error500,
     },
   }),
-  updateUserHandler,
+  updateUser,
 );
 
 // ユーザー削除
@@ -148,7 +153,7 @@ users.openapi(
       ...error500,
     },
   }),
-  deleteUserHandler,
+  deleteUser,
 );
 
 export default users;
