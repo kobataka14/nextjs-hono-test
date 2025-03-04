@@ -1,7 +1,7 @@
 import "server-only";
 
-export { createUser } from "./create";
-export { updateUser } from "./update";
-export { deleteUser } from "./delete";
+export { createUser } from "./createUser";
+export { updateUser } from "./updateUser";
+export { deleteUser } from "./deleteUser";
 export { getUser } from "./getUser";
 export { getUsers } from "./getUsers";

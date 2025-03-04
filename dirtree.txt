@@ -14,11 +14,11 @@
 │   │   ├── handlers
 │   │   │   └── users
 │   │   │       ├── index.ts
-│   │   │       ├── create.ts
-│   │   │       ├── delete.ts
+│   │   │       ├── createUser.ts
+│   │   │       ├── deleteUser.ts
 │   │   │       ├── getUser.ts
 │   │   │       ├── getUsers.ts
-│   │   │       └── update.ts
+│   │   │       └── updateUser.ts
 │   │   ├── lib
 │   │   │   └── db.ts
 │   │   ├── middlewares
