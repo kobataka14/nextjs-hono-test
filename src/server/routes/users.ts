@@ -14,7 +14,7 @@ import {
   updateUser,
   deleteUser,
 } from "@/server/handlers/users";
-import { error400, error404, error422, error500 } from "../responses/errors";
+import { ErrorResponses } from "../schemas/errors";
 import { defaultValidationHook } from "../middlewares/validationError";
 import { handleError } from "../middlewares/errorHandler";
 
@@ -41,15 +41,15 @@ users.openapi(
     },
     responses: {
       201: {
+        description: "Create a user",
         content: {
           "application/json": {
             schema: UserGetSchema,
           },
         },
-        description: "Create a user",
       },
-      ...error422,
-      ...error500,
+      422: { ...ErrorResponses[422] },
+      500: { ...ErrorResponses[500] },
     },
   }),
   createUser,
@@ -72,9 +72,9 @@ users.openapi(
         },
         description: "Retrieve the user",
       },
-      ...error404,
-      ...error422,
-      ...error500,
+      404: { ...ErrorResponses[404] },
+      422: { ...ErrorResponses[422] },
+      500: { ...ErrorResponses[500] },
     },
   }),
   getUser,
@@ -97,8 +97,8 @@ users.openapi(
         },
         description: "Retrieve the user list",
       },
-      ...error422,
-      ...error500,
+      422: { ...ErrorResponses[422] },
+      500: { ...ErrorResponses[500] },
     },
   }),
   getUsers,
@@ -128,9 +128,9 @@ users.openapi(
         },
         description: "Update the user",
       },
-      ...error400,
-      ...error422,
-      ...error500,
+      400: { ...ErrorResponses[400] },
+      422: { ...ErrorResponses[422] },
+      500: { ...ErrorResponses[500] },
     },
   }),
   updateUser,
@@ -148,9 +148,9 @@ users.openapi(
       204: {
         description: "Delete the user",
       },
-      ...error400,
-      ...error422,
-      ...error500,
+      400: { ...ErrorResponses[400] },
+      422: { ...ErrorResponses[422] },
+      500: { ...ErrorResponses[500] },
     },
   }),
   deleteUser,
